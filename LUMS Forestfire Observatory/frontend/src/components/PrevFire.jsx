@@ -8,7 +8,7 @@ const PrevFire = () => {
         backgroundColor: "lightblue",
         padding: "20px",
         marginTop: "20px",
-        marginLeft: "100px",
+        marginLeft: "20px",
       }}
     >
       <h2 style={{ marginLeft: "400px" }}>Previous Records</h2>
