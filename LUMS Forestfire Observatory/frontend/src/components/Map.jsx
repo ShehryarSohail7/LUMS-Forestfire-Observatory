@@ -34,7 +34,7 @@ const GoogleMap = () => {
           parametersBox.innerHTML = `
                     <p"><span style="font-weight: bold;">Longitude = </span><span style="color: #000000;">${lng}</span></p>
                     <p><span style="font-weight: bold;">Latitude = </span><span style="color: #000000;">${lat}</span></p>
-                    <p><a href="https://colab.research.google.com/drive/16k6gSp864u2EdfxiZvMQ_r2zeb26Dt_g" target="_blank" style="text-decoration: underline; color: blue;">Let's predict the fire mask!!</a></p>
+                    <p><a href="https://generator.loca.lt/" target="_blank" style="text-decoration: underline; color: blue;">Let's predict the fire mask!!</a></p>
                     <!-- <p>Temperature: ${temperature}°F</p>
                     <p>Min Temperature: ${min_temp}°F</p>
                     <p>Max Temperature: ${max_temp}°F</p>
