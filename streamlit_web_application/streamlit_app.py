@@ -292,18 +292,12 @@ plt.tight_layout()
 # model_mse_path = "/content/drive/MyDrive/Sproj_streamlit/model_checkpoint_mse.keras"
 # model = load_model(model_mse_path)
 # 
-# def preprocess_input_data(uploaded_test_input_data, uploaded_region_info):
+# def preprocess_input_data(uploaded_region_info):
 #     # Read the content of the uploaded files
-#     test_input_data_content = uploaded_test_input_data.read()
 #     region_info_content = uploaded_region_info.read()
 # 
 #     # Parse the JSON content
-#     test_input_data = json.loads(test_input_data_content)
 #     region_info = json.loads(region_info_content)
-# 
-#     # Extracting the 'prev_fire_mask' from the test input data
-#     input_array = np.array(test_input_data)
-#     prev_fire_mask = input_array[0, :, :, -1]
 # 
 #     # Extracting data from region_info.json
 #     wind_dir = np.array(region_info['wind_direction'])
@@ -317,6 +311,7 @@ plt.tight_layout()
 #     pop_density = np.array(region_info['population_density'])
 #     drought_index = np.array(region_info['drought_index'])
 #     erc = np.array(region_info['energy_release_component'])
+#     firemask = np.array(region_info['fire_mask'])
 # 
 #     # Reshaping arrays
 #     wind_dir = wind_dir.reshape(32, 32)
@@ -330,14 +325,14 @@ plt.tight_layout()
 #     pop_density = pop_density.reshape(32, 32)
 #     drought_index = drought_index.reshape(32, 32)
 #     erc = erc.reshape(32, 32)
+#     firemask = firemask.reshape(32, 32)
 # 
 #     # Creating inputs array
 #     inputs = [elev, wind_dir, wind_spd, min_temp, max_temp, humidity,
-#                        precip, drought_index, vege, pop_density, erc, prev_fire_mask]
+#                        precip, drought_index, vege, pop_density, erc, firemask]
 #     inputs = np.array(inputs)
 #     inputs = inputs.transpose(1, 2, 0)
 #     inputs = np.expand_dims(inputs, axis=0)  # Add extra dimension
-#     inputs = input_array
 #     return inputs
 # 
 # 
@@ -349,9 +344,6 @@ plt.tight_layout()
 # def display_results(inputs, fire_masks):
 #     # Display inputs and predicted fire masks
 #     fig, axes = plt.subplots(1, inputs.shape[-1] + 2, figsize=(15, 5))
-#     # titles = ['Elev.', 'W dire.', 'W. spe.', 'Min T', 'Max T',
-#     #           'Hdty', 'Ppt', 'Dgt Idx', 'Veg.', 'PD',
-#     #           'ERC', 'PFM', 'FM', 'Prediction']
 #     titles = ['Elevation', 'Wind direction', 'Wind speed', 'Min Temp.', 'Max Temp.',
 #               'Humidity', 'Precipitate', 'Drought index', 'Vegetation', 'Population Density',
 #               'Energy Release Component', 'Previous Fire Mask', 'Fire Mask', 'Prediction']
@@ -380,13 +372,12 @@ plt.tight_layout()
 # def main():
 #     st.title("LUMS Forest Fire Observatory: Results")
 # 
-#     uploaded_test_input_data = st.file_uploader("Upload test_input_data.json", type='json')
-#     uploaded_region_info = st.file_uploader("Upload region_info.json", type='json')
+#     uploaded_test_input_data = st.file_uploader("Upload json file with parameters as a dictionary of lists", type='json')
 # 
-#     if uploaded_test_input_data is not None and uploaded_region_info is not None:
+#     if uploaded_test_input_data is not None:
 #         st.write("Files uploaded successfully!")
 # 
-#         inputs = preprocess_input_data(uploaded_test_input_data, uploaded_region_info)
+#         inputs = preprocess_input_data(uploaded_test_input_data)
 #         fire_masks = predict_fire_masks(inputs, model)
 # 
 #         display_results(inputs, fire_masks)
